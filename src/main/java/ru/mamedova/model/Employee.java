@@ -1,15 +1,41 @@
 package ru.mamedova.model;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "employee")
 public class Employee {
 
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private Integer age;
-    private City city;
 
-    public Employee(String firstName, String lastName, String gender, Integer age, City city) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "gender")
+    private String gender;
+    @Column(name = "age")
+    private Integer age;
+    @Column(name = "city_id")
+    private int city;
+
+
+    public Employee() {
+    }
+
+    public Employee(String firstName, String lastName, String gender, Integer age, int city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.age = age;
+        this.city = city;
+    }
+
+    public Employee(Integer id, String firstName, String lastName, String gender, Integer age, int city) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -49,11 +75,19 @@ public class Employee {
         this.age = age;
     }
 
-    public City getCity() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public int getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(int city) {
         this.city = city;
     }
 
@@ -62,12 +96,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(gender, employee.gender) && Objects.equals(age, employee.age) && Objects.equals(city, employee.city);
+        return city == employee.city && Objects.equals(id, employee.id) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(gender, employee.gender) && Objects.equals(age, employee.age);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, gender, age, city);
+        return Objects.hash(id, firstName, lastName, gender, age, city);
     }
 
     @Override

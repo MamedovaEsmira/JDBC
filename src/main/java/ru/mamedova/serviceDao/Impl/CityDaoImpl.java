@@ -1,28 +1,21 @@
 package ru.mamedova.serviceDao.Impl;
 
-import ru.mamedova.connetion.ApplicationConnection;
+import ru.mamedova.connetion.HibernateSessionFactoryUtil;
+import ru.mamedova.exception.NotFoundCityAtDBException;
 import ru.mamedova.model.City;
 import ru.mamedova.serviceDao.CityDao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class CityDaoImpl extends CityDao {
 
-    private final ApplicationConnection applicationConnection = new ApplicationConnection();
-
     @Override
-    public City findById(Integer id) throws SQLException {
-        try(PreparedStatement statement = applicationConnection.getPrepareStatement
-                ("SELECT * FROM city WHERE city_id = (?)")){
-            statement.setInt(1,id);
-            statement.executeQuery();
+    public City findById(Integer id)  {
+        City city = HibernateSessionFactoryUtil.getSessionFactory().openSession().get(City.class, id);
 
-            ResultSet resultSet = statement.getResultSet();
-            resultSet.next();
-
-            return new City(resultSet.getString("city_name"));
+        if (city != null) {
+            return city;
+        } else {
+            throw new NotFoundCityAtDBException("Город не найден в БД.");
         }
     }
 }

@@ -1,10 +1,27 @@
 package ru.mamedova.model;
-
+import javax.persistence.*;
 import java.util.Objects;
-
+@Entity
+@Table(name="city")
 public class City {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "city_id")
+    private Integer id;
+
+    @Column(name = "city_name")
     private String name;
+
+
+
+    public City() {
+    }
+
+    public City(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public City(String name){
         this.name = name;
@@ -36,6 +53,3 @@ public class City {
         return name;
     }
 }
-
-
-
