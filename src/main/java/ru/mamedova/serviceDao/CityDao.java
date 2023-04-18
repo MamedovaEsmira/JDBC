@@ -2,8 +2,12 @@ package ru.mamedova.serviceDao;
 
 import ru.mamedova.model.City;
 
-import java.sql.SQLException;
+public interface CityDao {
+    City findCityById(Integer id);
 
-public abstract class CityDao {
-    public abstract City findById(Integer id) throws SQLException;
+    void addNewCity(City city);
+
+    void updateCity(City city);
+
+    void deleteCity(City city);
 }

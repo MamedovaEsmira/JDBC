@@ -1,6 +1,6 @@
 package ru.mamedova.exception;
 
-public class NotFoundEmployeeAtDBException extends RuntimeException{
+public class NotFoundEmployeeAtDBException extends RuntimeException {
     public NotFoundEmployeeAtDBException() {
     }
 

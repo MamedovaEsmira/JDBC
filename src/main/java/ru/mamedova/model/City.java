@@ -1,8 +1,10 @@
 package ru.mamedova.model;
+
 import javax.persistence.*;
 import java.util.Objects;
+
 @Entity
-@Table(name="city")
+@Table(name = "city")
 public class City {
 
     @Id
@@ -13,9 +15,11 @@ public class City {
     @Column(name = "city_name")
     private String name;
 
-
-
     public City() {
+    }
+
+    public City(Integer id) {
+        this.id = id;
     }
 
     public City(Integer id, String name) {
@@ -23,7 +27,7 @@ public class City {
         this.name = name;
     }
 
-    public City(String name){
+    public City(String name) {
         this.name = name;
     }
 
@@ -51,5 +55,9 @@ public class City {
     @Override
     public String toString() {
         return name;
+    }
+
+    public Object getId() {
+        return null;
     }
 }

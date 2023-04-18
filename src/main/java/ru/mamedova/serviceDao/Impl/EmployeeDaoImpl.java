@@ -11,11 +11,9 @@ import ru.mamedova.serviceDao.EmployeeDao;
 
 import java.util.List;
 
-public class EmployeeDaoImpl extends EmployeeDao {
+public class EmployeeDaoImpl implements EmployeeDao {
 
-
-    private final CityDao cityDao = new CityDaoImpl();
-
+CityDao cityDao = new CityDaoImpl();
 
     @Override
     public List<Employee> findAllEmployee() {
@@ -33,7 +31,6 @@ public class EmployeeDaoImpl extends EmployeeDao {
     @Override
     public Employee findById(Integer id) {
         Employee employee = HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Employee.class, id);
-
         if (employee != null) {
             return employee;
         } else {
@@ -43,18 +40,16 @@ public class EmployeeDaoImpl extends EmployeeDao {
 
     @Override
     public void addNewEmployee(Employee employee) {
-        Integer id;
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            id = (Integer) session.save(employee);
+            session.save(employee);
+            transaction.commit();
         }
     }
-
     @Override
-    public void updateEmployee(Employee employee, Integer id) {
+    public void updateEmployee(Employee employee) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            employee.setId(id);
             session.update(employee);
             transaction.commit();
         }

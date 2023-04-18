@@ -1,16 +1,18 @@
 package ru.mamedova.serviceDao;
+
 import ru.mamedova.model.Employee;
+
 import java.util.List;
 
+public interface EmployeeDao {
 
-public abstract class EmployeeDao {
-        public abstract List<Employee> findAllEmployee();
+    List<Employee> findAllEmployee();
 
-        public abstract Employee findById(Integer id);
+    Employee findById(Integer id);
 
-        public abstract void addNewEmployee(Employee employee);
+    void addNewEmployee(Employee employee);
 
-        public abstract void updateEmployee(Employee employee, Integer id);
+    void updateEmployee(Employee employee);
 
-        public abstract void deleteEmployee(Employee employee);
+    void deleteEmployee(Employee employee);
 }
