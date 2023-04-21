@@ -13,7 +13,6 @@ public class CityDaoImpl implements CityDao {
     @Override
     public City findCityById(Integer id) {
         City city = HibernateSessionFactoryUtil.getSessionFactory().openSession().get(City.class, id);
-
         if (city != null) {
             return city;
         } else {
@@ -24,7 +23,7 @@ public class CityDaoImpl implements CityDao {
     @Override
     public void addNewCity(City city) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
-            Transaction transaction = session.getTransaction();
+            Transaction transaction = session.beginTransaction();
             session.save(city);
             transaction.commit();
         }
