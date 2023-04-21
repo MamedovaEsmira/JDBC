@@ -47,7 +47,7 @@ CityDao cityDao = new CityDaoImpl();
         }
     }
     @Override
-    public void updateEmployee(Employee employee) {
+    public void updateEmployee(Employee employee, Integer id) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.update(employee);

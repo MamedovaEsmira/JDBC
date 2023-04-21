@@ -1,6 +1,7 @@
 package ru.mamedova.model;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +16,8 @@ public class City {
     @Column(name = "city_name")
     private String name;
 
+    @OneToMany(mappedBy = "city_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Employee> employees;
     public City() {
     }
 
@@ -39,6 +42,23 @@ public class City {
         this.name = name;
     }
 
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,9 +75,5 @@ public class City {
     @Override
     public String toString() {
         return name;
-    }
-
-    public Object getId() {
-        return null;
     }
 }

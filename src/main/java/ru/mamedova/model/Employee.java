@@ -17,14 +17,17 @@ public class Employee {
     private String gender;
     @Column(name = "age")
     private Integer age;
-    @Column(name = "city_id")
-    private int city;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "city_id")
+    private City city;
 
-
-    public Employee() {
+    public Employee(String firstName, String lastName, String gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
     }
 
-    public Employee(String firstName, String lastName, String gender, Integer age, int city) {
+    public Employee(String firstName, String lastName, String gender, Integer age, City city) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -32,13 +35,17 @@ public class Employee {
         this.city = city;
     }
 
-    public Employee(Integer id, String firstName, String lastName, String gender, Integer age, int city) {
+    public Employee(Integer id, String firstName, String lastName, String gender, Integer age, City city) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.age = age;
         this.city = city;
+    }
+
+    public Employee() {
+
     }
 
     public String getFirstName() {
@@ -81,11 +88,11 @@ public class Employee {
         this.id = id;
     }
 
-    public int getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(int city) {
+    public void setCity(City city) {
         this.city = city;
     }
 

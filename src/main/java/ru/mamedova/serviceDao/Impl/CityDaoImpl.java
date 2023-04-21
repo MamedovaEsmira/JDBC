@@ -30,7 +30,7 @@ public class CityDaoImpl implements CityDao {
     }
 
     @Override
-    public void updateCity(City city) {
+    public void updateCity(City city, Integer id) {
         try (Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
             session.update(city);

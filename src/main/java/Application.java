@@ -25,8 +25,8 @@ public class Application {
         }
     }
 
-    static void updateCity(City city) {
-        cityDao.updateCity(city);
+    static void updateCity(City city, Integer id) {
+        cityDao.updateCity(city, id);
     }
 
     static void deleteCity(City city) {
@@ -46,8 +46,8 @@ public class Application {
         }
     }
 
-    static void updateEmployee(Employee employee) {
-        employeeDao.updateEmployee(employee);
+    static void updateEmployee(Employee employee, Integer id) {
+        employeeDao.updateEmployee(employee, id);
     }
 
     static void deleteEmployee(Employee employee) {
@@ -56,14 +56,21 @@ public class Application {
 
     public static void main(String[] args) {
 
-        System.out.println(employeeDao.findById(6));
-        Employee anna = new Employee("Anna", "Petrova", "Female", 35, 3);
+        System.out.println(employeeDao.findById(2));
+        Employee anna = new Employee("Anna", "Petrova", "Female");
         employeeDao.addNewEmployee(anna);
         for (Employee employee : employeeDao.findAllEmployee()) {
             System.out.println(employee);
         }
-        anna.setLastName("Stepanov");
+        anna.setLastName("Petrova");
         employeeDao.deleteEmployee(anna);
+
+        System.out.println(cityDao.findCityById(3));
+        City moscow = new City("Moscow");
+        cityDao.addNewCity(moscow);
+        moscow.setName("Ne Moscow");
+        cityDao.updateCity(moscow, 3);
+        cityDao.deleteCity(moscow);
     }
 
 }

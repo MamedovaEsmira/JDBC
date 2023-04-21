@@ -7,7 +7,7 @@ public interface CityDao {
 
     void addNewCity(City city);
 
-    void updateCity(City city);
+    void updateCity(City city, Integer id);
 
     void deleteCity(City city);
 }
